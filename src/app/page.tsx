@@ -1,5 +1,6 @@
 import { DateTime } from "luxon"
 
+export const revalidate = 60 // Seconds (1 minute)
 enum Day {
   Push,
   Pull,
