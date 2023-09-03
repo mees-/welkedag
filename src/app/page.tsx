@@ -10,7 +10,7 @@ enum Day {
 const days = ["push", "pull", "leg"] as Record<Day, string>
 
 export default function Home() {
-  const today = DateTime.now().setLocale("Europe/Amsterdam")
+  const today = DateTime.local({ zone: "Europe/Amsterdam" })
   const firstPushDay = today.set({ month: 1, day: 3 })
   const daysSinceFirstPushDay = today.diff(firstPushDay, "days").days
   const day = (daysSinceFirstPushDay % 3) as Day
