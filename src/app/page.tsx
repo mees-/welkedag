@@ -1,6 +1,7 @@
+"use client"
+
 import { DateTime } from "luxon"
 
-export const revalidate = 60 // Seconds (1 minute)
 enum Day {
   Push,
   Pull,
@@ -10,7 +11,7 @@ enum Day {
 const days = ["push", "pull", "leg"] as Record<Day, string>
 
 export default function Home() {
-  const today = DateTime.local({ zone: "Europe/Amsterdam" })
+  const today = DateTime.now()
   const firstPushDay = today.set({ month: 1, day: 3 })
   const daysSinceFirstPushDay = today.diff(firstPushDay, "days").days
   const day = (daysSinceFirstPushDay % 3) as Day
