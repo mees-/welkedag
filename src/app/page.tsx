@@ -3,7 +3,8 @@
 import { DateTime } from "luxon"
 import Link from "next/link"
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts"
-import { AnswerData, Exercise, SurveyAnswers } from "./survey/page"
+import { AnswerData, SurveyAnswers } from "./survey/types"
+import { Exercise } from "./survey/types"
 import { PropsWithChildren } from "react"
 
 enum Day {

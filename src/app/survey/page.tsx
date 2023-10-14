@@ -2,28 +2,7 @@
 import Link from "next/link"
 import { ComponentProps, PropsWithChildren, useEffect, useState } from "react"
 import { useLocalStorage } from "usehooks-ts"
-
-export enum Exercise {
-  BarbellBenchpress = "BarbellBenchpress",
-  Dips = "Dips",
-  Flys = "Flys",
-  Pullup = "Pullup",
-  Curls = "Curls",
-
-  Legpress = "Legpress",
-  Squat = "Squat",
-  Lunges = "Lunges",
-}
-export interface SurveyAnswers {
-  age: number
-  gender: "m" | "f" | "u"
-  gymFrequency: 1 | 2 | 3 | 4 | 5 | 6 | 7
-  favoriteExercise: Exercise
-  bulk: boolean
-  timeToGym: number
-}
-
-export type AnswerData = Partial<SurveyAnswers>
+import { AnswerData, Exercise, SurveyAnswers } from "./types"
 
 export default function Survey() {
   const [answers, setAnswers] = useLocalStorage<AnswerData>("survey-answers", {})
