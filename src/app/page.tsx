@@ -2,7 +2,7 @@
 
 import { DateTime } from "luxon"
 import Link from "next/link"
-import { useReadLocalStorage } from "usehooks-ts"
+import { useLocalStorage, useReadLocalStorage } from "usehooks-ts"
 import { AnswerData, Exercise, SurveyAnswers } from "./survey/page"
 import { PropsWithChildren } from "react"
 
@@ -26,11 +26,26 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       {usePersonalised ? <PersonalisedSchedule /> : <GeneralDaySchedule />}
+      <PersonalisedLink />
+    </main>
+  )
+}
+
+function PersonalisedLink() {
+  const [answers, setAnswers] = useLocalStorage<SurveyAnswers | null>("survey-answers", null)
+  if (answers == null) {
+    return (
       <Link href="/survey" className="mt-6 font-semibold opacity-50">
         Click here for personalised days
       </Link>
-    </main>
-  )
+    )
+  } else {
+    return (
+      <button onClick={() => setAnswers(null)} className="mt-6 font-semibold opacity-50">
+        Click here to reset your personalised answers
+      </button>
+    )
+  }
 }
 
 function MainText({ children }: PropsWithChildren) {
