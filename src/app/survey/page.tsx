@@ -36,7 +36,7 @@ export default function Survey() {
   if (answers.gender == null) {
     return (
       <>
-        <Label htmlFor="gender">Do you have a pp, tt&apos;s or nether?</Label>
+        <Label htmlFor="gender">Do you have a pp, tt&apos;s or neither?</Label>
         <fieldset id="gender" className="flex flex-row justify-between px-6">
           <button className="rounded px-2 py-1 bg-orange-400" onClick={() => setAnswer("gender", "m")}>
             pp
