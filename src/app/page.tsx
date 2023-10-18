@@ -2,7 +2,7 @@
 
 import { DateTime } from "luxon"
 import Link from "next/link"
-import { useLocalStorage, useReadLocalStorage } from "usehooks-ts"
+import { useLocalStorage } from "./survey/useLocalStorage"
 import { AnswerData, SurveyAnswers } from "./survey/types"
 import { Exercise } from "./survey/types"
 import { PropsWithChildren } from "react"
@@ -14,7 +14,7 @@ enum Day {
 }
 
 export default function Home() {
-  const surveyAnswers = useReadLocalStorage<AnswerData>("survey-answers")
+  const [surveyAnswers] = useLocalStorage<AnswerData>("survey-answers")
   const usePersonalised =
     surveyAnswers != null &&
     surveyAnswers.age != null &&
@@ -33,7 +33,7 @@ export default function Home() {
 }
 
 function PersonalisedLink() {
-  const [answers, setAnswers] = useLocalStorage<SurveyAnswers | null>("survey-answers", null)
+  const [answers, setAnswers] = useLocalStorage<SurveyAnswers>("survey-answers")
   if (answers == null) {
     return (
       <Link href="/survey" className="mt-6 font-semibold opacity-50">
@@ -65,7 +65,7 @@ function GeneralDaySchedule() {
 const legDayExercises = new Set<Exercise>([Exercise.Legpress, Exercise.Squat, Exercise.Lunges])
 
 function PersonalisedSchedule() {
-  const surveyAnswers = useReadLocalStorage<SurveyAnswers>("survey-answers")
+  const [surveyAnswers] = useLocalStorage<SurveyAnswers>("survey-answers")
   if (surveyAnswers == null) {
     return <GeneralDaySchedule />
   }

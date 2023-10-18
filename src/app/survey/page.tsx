@@ -1,15 +1,24 @@
 "use client"
 import Link from "next/link"
 import { ComponentProps, PropsWithChildren, useEffect, useState } from "react"
-import { useLocalStorage } from "usehooks-ts"
 import { AnswerData, Exercise, SurveyAnswers } from "./types"
+import { useLocalStorage } from "./useLocalStorage"
 
 export default function Survey() {
-  const [answers, setAnswers] = useLocalStorage<AnswerData>("survey-answers", {})
+  const [answers, setAnswers] = useLocalStorage<AnswerData>("survey-answers")
   const setAnswer = <K extends keyof SurveyAnswers>(key: K, value: SurveyAnswers[K]) =>
     setAnswers({ ...answers, [key]: value })
 
   const [currentAnswer, setCurrentAnswer] = useState<string>("")
+  useEffect(() => {
+    if (answers == null) {
+      setAnswers({})
+    }
+  })
+  if (answers === null) {
+    console.log("answers", answers)
+    return <p>Loading</p>
+  }
 
   if (answers.age == null) {
     return (
